@@ -1,14 +1,14 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useNavigation } from '@react-navigation/native';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
-import * as ScreenOrietation from 'expo-screen-orientation';
 
 import HomeScreen from '.';
-import Speakes from './speakes';
-import Curadores from './curadores';
+import Speakes from '../personas/speakes';
+import Curadores from '../personas/curadores'
 import Swiper from 'react-native-swiper';
+import HeaderHome from '../home/header';
 
 export default function Opcao() {
 
@@ -21,23 +21,7 @@ const [videoReady, setVideoReady] = useState(false);
  return (
    <View style={styles.container}>
     
-    <View style={styles.headerTop}>
-      <TouchableOpacity onPress={() => Navigation.navigate(HomeScreen)}>
-        <Image source={require('../../images/arrow-left.png')} style={{width:30, height:30}}/>
-      </TouchableOpacity>
-      <Text style={styles.title}>The Customer Summit</Text>
-        <View style={styles.areaFlags}>
-            <TouchableOpacity onPress={() => changeLanguage('br')}>
-                <Image source={require('../../images/Brazil-flag.png')} style={styles.ctaFlag}/>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => changeLanguage('en')}>
-                <Image source={require('../../images/USA-flag.png')} style={styles.ctaFlag}/>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => changeLanguage('sp')}>
-                <Image source={require('../../images/Spain-flag.png')} style={styles.ctaFlag}/>
-            </TouchableOpacity>
-        </View>
-   </View>
+    <HeaderHome/>
       
      <ScrollView style={{width:'100%'}}>
      
@@ -56,9 +40,6 @@ const [videoReady, setVideoReady] = useState(false);
       { !videoReady && <ActivityIndicator color={'#851849'}/>}
      
 
-      <Text style={styles.title2}>
-        Speakers do evento
-      </Text>
 
       <Speakes/>
   
@@ -155,16 +136,7 @@ const styles = StyleSheet.create({
       alignItems:'center'
 
    },
-   headerTop:{
-      paddingTop:50,
-      paddingHorizontal:10,
-      justifyContent:"space-around",
-      alignItems:'center',
-      backgroundColor:'#000D31',
-      flexDirection:'row',
-      height:120,
-      width:'100%'
-  },
+ 
   title:{
     fontSize:RFValue(12),
     marginVertical:8,
@@ -180,21 +152,8 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     color:'#851849',
   },
-  // flags
-  areaFlags:{
-    flexDirection:"row",
-    justifyContent:'center',
-    alignItems:'stretch',
-  },
-  ctaFlag:{
-    margin:2,
-  },
-  description:{
-    width:300,
-    textAlign:'center',
-    fontWeight:'bold',
-    color:'#851849'
-  },
+
+  
   // block numeros
   numEvento:{
     flexDirection:'row',
